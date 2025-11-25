@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat de Rolagem de Dados</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="mainContainer">
+      <!-- Coluna do Chat -->
+      <div id="chatColumn">
+        <!-- Barra de Navegação Superior com Ícones -->
+        <div id="navBar">
+          <div class="icon" onclick="switchToChat()">💬 Chat</div>
+          <div class="icon" onclick="switchToDocuments()">📄 Fichas</div>
+        </div>
+
+        <!-- Área do Chat -->
+        <div id="chatWindow">
+          <!-- As mensagens do chat serão adicionadas aqui -->
+        </div>
+
+        <!-- Entrada de Mensagem -->
+        <div id="inputContainer">
+          <input
+            type="text"
+            id="inputMessage"
+            placeholder="Digite uma mensagem ou comando"
+          />
+          <button
+            id="sendButton"
+            onclick="sendCommand(document.getElementById('inputMessage').value)"
+          >
+            Enviar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- modal -->
+
+    <!-- Modal para adicionar ficha -->
+    <div id="addFichaModal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close-button" onclick="closeAddFichaModal()">&times;</span>
+        <h2>Adicionar Nova Ficha</h2>
+
+        <form id="fichaForm">
+          <label for="nomePersonagem">Nome do Personagem:</label>
+          <input type="text" id="nomePersonagem" name="nomePersonagem" />
+          <input type="hidden" id="fichaId" name="fichaId" />
+          <label for="classe">Classe:</label>
+          <input type="text" id="classe" name="classe" />
+
+          <!-- <label for="raca">Raça:</label>
+          <input type="text" id="raca" name="raca" />
+
+          <label for="alinhamento">Alinhamento:</label>
+          <input type="text" id="alinhamento" name="alinhamento" />
+
+          <label for="aparencia">Aparência:</label>
+          <input type="text" id="aparencia" name="aparencia" /> -->
+
+          <label for="dadoDano">Dado de Dano:</label>
+          <input type="text" id="dadoDano" name="dadoDano" />
+
+          <label for="armadura">Armadura:</label>
+          <input type="number" id="armadura" name="armadura" />
+
+          <label for="pontosVida">Pontos de Vida:</label>
+          <input type="number" id="pontosVida" name="pontosVida" />
+
+          <label for="maxpontosVida">Pontos de Vida Máximos:</label>
+          <input type="number" id="maxpontosVida" name="maxpontosVida" />
+
+          <label for="nivel">Nível:</label>
+          <input type="number" id="nivel" name="nivel" />
+
+          <label for="xp">XP:</label>
+          <input type="number" id="xp" name="xp" />
+
+          <label for="moedas">Moedas:</label>
+          <input type="number" id="moedas" name="moedas" />
+
+          <label for="carga">Carga:</label>
+          <input type="number" id="carga" name="carga" />
+
+          <label for="maxCarga">Carga Máxima:</label>
+          <input type="number" id="maxCarga" name="maxCarga" />
+
+          <!-- Campos dinâmicos para movimentos -->
+          <label>Movimentos:</label>
+          <div id="movimentosContainer">
+            <input
+              type="text"
+              name="movimentoNome"
+              placeholder="Nome do movimento"
+            />
+            <textarea
+              name="movimentoDesc"
+              placeholder="Descrição do movimento"
+            ></textarea>
+            <button type="button" onclick="addMovimento()">
+              Adicionar Movimento
+            </button>
+          </div>
+
+          <!-- Campos dinâmicos para vínculos -->
+          <label>Vínculos:</label>
+          <div id="vinculosContainer">
+            <input type="text" name="vinculo" placeholder="Vínculo" />
+            <button type="button" onclick="addVinculo()">
+              Adicionar Vínculo
+            </button>
+          </div>
+
+          <!-- Campos dinâmicos para inventário -->
+          <label>Inventário:</label>
+          <div id="inventarioContainer">
+            <input type="text" name="inventarioItem" placeholder="Item" />
+            <button type="button" onclick="addInventario()">
+              Adicionar Item
+            </button>
+          </div>
+
+          <label for="notas">Notas:</label>
+          <textarea id="notas" name="notas"></textarea>
+
+          <button type="button" onclick="saveFicha()">Salvar Ficha</button>
+          <button type="button" onclick="deleteFicha()">Deletar Ficha</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

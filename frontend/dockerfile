@@ -1,0 +1,8 @@
+# Usar uma imagem base do Nginx para servir arquivos estáticos
+FROM nginx:alpine
+
+# Copiar os arquivos do frontend para o diretório onde o Nginx vai servir
+COPY ./frontend /usr/share/nginx/html
+
+# Expor a porta 80 para acessar o frontend
+EXPOSE 80
