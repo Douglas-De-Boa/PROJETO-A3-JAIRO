@@ -376,6 +376,8 @@ function deleteFicha() {
         if (response.ok) {
           alert("Ficha deletada com sucesso!");
           // Atualize a lista de fichas após deletar
+
+          window.location.reload();
           document.getElementById(id).remove();
         } else {
           alert("Erro ao deletar a ficha. Tente novamente.");
