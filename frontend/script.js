@@ -239,10 +239,19 @@ async function saveFicha() {
     // Ficha sem ID (nova), logo cria uma nova
     enviarFicha(ficha); // Criar uma nova ficha
   }
+closeAddFichaModal();
+showSuccess("Personagem cadastrado ou editado com sucesso!");
 
-  closeAddFichaModal();
-  switchToChat();
-  switchToDocuments();
+setTimeout(() => {
+  switchToDocuments(); // recarrega a lista de fichas
+}, 1600);
+
+//showSuccess("Personagem cadastrado com sucesso!");
+
+//setTimeout(() => {
+//  switchToDocuments();
+//}, 1600);
+
 }
 
 function displayFichaDetails(id) {
@@ -365,7 +374,6 @@ async function verificarFichaExistente(id) {
 function deleteFicha() {
   const form = document.getElementById("fichaForm");
   const formData = new FormData(form);
-  // Obtém o ID da ficha do campo oculto (se existir)
   const id = formData.get("fichaId");
 
   if (confirm("Tem certeza de que deseja deletar esta ficha?")) {
@@ -374,11 +382,12 @@ function deleteFicha() {
     })
       .then((response) => {
         if (response.ok) {
-          alert("Ficha deletada com sucesso!");
-          // Atualize a lista de fichas após deletar
+          closeAddFichaModal();
+          showDeleteSuccess();
 
-          window.location.reload();
-          document.getElementById(id).remove();
+          setTimeout(() => {
+            switchToDocuments(); // recarrega a lista SEM voltar pro chat
+          }, 1500);
         } else {
           alert("Erro ao deletar a ficha. Tente novamente.");
         }
@@ -387,13 +396,34 @@ function deleteFicha() {
         console.error("Erro ao deletar ficha:", error);
       });
   }
-  closeAddFichaModal();
-  switchToChat();
-  switchToChat();
-  switchToDocuments();
 }
+
 
 function closeAddFichaModal() {
   const modal = document.getElementById("addFichaModal");
-  modal.classList.add("hidden"); // Garante que a classe "hidden" seja aplicada
+  modal.classList.add("hidden");
+}
+function showSuccess(message = "Operação realizada com sucesso!") {
+  const modal = document.getElementById("successModal");
+  const msg = document.getElementById("successMessage");
+  if (!modal || !msg) {
+    console.error("Modal de sucesso não encontrado no DOM.");
+    return;
+  }
+
+  msg.innerText = message;
+  modal.classList.remove("hidden");
+
+  setTimeout(() => {
+    modal.classList.add("hidden");
+  }, 1500);
+}
+function showDeleteSuccess() {
+  const modal = document.getElementById("deleteSuccessModal");
+  modal.classList.remove("hidden");
+
+  // some sozinho depois de 2 segundos
+  setTimeout(() => {
+    modal.classList.add("hidden");
+  }, 1500);
 }
